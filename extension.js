@@ -5,18 +5,26 @@ const lineCodeProcessing = require("./lineCodeProcessing");
 // this method is called when your extension is activated
 // your extension is activated the very first time the command is executed
 
+const isWithBrackets = vscode.workspace.getConfiguration( 'formatted-scope-log' ).get( 'isWithBrackets' ) || false;
+const logPrefix = vscode.workspace.getConfiguration( 'formatted-scope-log' ).get( 'logPrefix' ) || 'this.log';
+
 /**
  * @param {any} lvl
  * @param {string} className
  * @param {string} methodName
  */
 const format = (lvl, className, methodName) => {
-  const isWithBrackets = false;
-  /* if (lvl !== 'info' && lvl !== 'warn' && lvl !== 'error') {} */
-  const logPrefix = 'this.log.';
-  return `${logPrefix}${lvl}('${isWithBrackets ? '[' : ''}${className}:${methodName}${isWithBrackets ? ']' : ''}', {});`;
+  if (logPrefix === 'console' && lvl === 'info') {
+    lvl = 'log';
+  } 
+  return `${logPrefix}.${lvl}('${isWithBrackets ? '[' : ''}${className}:${methodName}${isWithBrackets ? ']' : ''}', {});`;
 }
 
+/**
+ * @param {import("vscode").TextDocument} document
+ * @param {number} lineOfSelection
+ * @param {string} lvl
+ */
 const buildMessage = (document, /* selection, */ lineOfSelection, lvl) => {
   const classThatEncloseTheSelection = enclosingBlockName(
     document,
@@ -45,13 +53,7 @@ function blockClosingBraceLineNum(
   while (!enclosingBracketFounded && lineNum < docNbrOfLines - 1) {
     lineNum++;
     const currentLineText = document.lineAt(lineNum).text;
-    /* if (/{/.test(currentLineText)) {
-      nbrOfOpeningBrackets++;
-    } */
     numberOfOpeningBrackets += currentLineText.split('{').length - 1;
-    /* if (/}/.test(currentLineText)) {
-      nbrOfClosingBrackets++;
-    } */
     numberOfClosingBrackets += currentLineText.split('}').length - 1;
     
     if (numberOfOpeningBrackets === numberOfClosingBrackets) {
@@ -64,7 +66,10 @@ function blockClosingBraceLineNum(
 
 /**
  * Return the name of the enclosing block whether if it's a class or a function
- * @author Chakroun Anas <chakroun.anas@outlook.com>
+ *
+ * @param {import("vscode").TextDocument} document
+ * @param {number} lineOfSelectedVar
+ * @param {string} blockType
  */
 function enclosingBlockName(
   document,
@@ -121,7 +126,6 @@ function activate(context) {
   let loginfo = vscode.commands.registerCommand('log-scope-ext.loginfo', function () {
     // The code you place here will be executed every time your command is executed
     // Display a message box to the user
-    vscode.window.showInformationMessage('Hello World!');
     const editor = vscode.window.activeTextEditor;
     if (!editor) {
       return; // No open text editor
@@ -138,7 +142,6 @@ function activate(context) {
   let logwarn = vscode.commands.registerCommand('log-scope-ext.logwarn', function () {
     // The code you place here will be executed every time your command is executed
     // Display a message box to the user
-    vscode.window.showInformationMessage('Hello World!');
     const editor = vscode.window.activeTextEditor;
     if (!editor) {
       return; // No open text editor
@@ -155,7 +158,6 @@ function activate(context) {
   let logerror = vscode.commands.registerCommand('log-scope-ext.logerror', function () {
     // The code you place here will be executed every time your command is executed
     // Display a message box to the user
-    vscode.window.showInformationMessage('Hello World!');
     const editor = vscode.window.activeTextEditor;
     if (!editor) {
       return; // No open text editor
@@ -169,8 +171,6 @@ function activate(context) {
     });
   });
   context.subscriptions.push(loginfo, logwarn, logerror);
-  /* context.subscriptions.push(logwarn);
-  context.subscriptions.push(logerror); */
 
 }
 exports.activate = activate;

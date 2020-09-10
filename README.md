@@ -1,6 +1,6 @@
 # log-scope-ext README
 
-This is the README for your extension "log-scope-ext". After writing up a brief description, we recommend including the following sections.
+This is the README for your extension "log-scope-ext".
 
 ## Features
 
@@ -18,14 +18,10 @@ If you have any requirements or dependencies, add a section describing those and
 
 ## Extension Settings
 
-Include if your extension adds any VS Code settings through the `contributes.configuration` extension point.
-
-For example:
-
 This extension contributes the following settings:
 
-* `myExtension.enable`: enable/disable this extension
-* `myExtension.thing`: set to `blah` to do something
+* `formatted-scope-log.isWithBrackets`: enable/disable brackets around message text. Default `true`
+* `formatted-scope-log.logPrefix`: set log prefix (log type), after witch follows `.info` (for `console` - `.log`)|`.warn`|`.error`. Default `this.log`. Possible values (for example): `log`, `console`.
 
 ## Known Issues
 

@@ -1,7 +1,8 @@
 {
 	"name": "log-scope-ext",
 	"displayName": "log-scope-ext",
-	"description": "log scope ext",
+	"description": "Formatted scope log extension",
+	"icon": "icon.png",
 	"version": "0.0.1",
 	"publisher": "d",
 	"engines": {
