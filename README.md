@@ -4,7 +4,7 @@ This is the README for your extension "log-scope-ext".
 
 ## Features
 
-\!\[preview\]\(preview.png\)
+\!\[preview\]\(preview.gif\)
 
 > Tip: Many popular extensions utilize animations. This is an excellent way to show off your extension! We recommend short, focused animations that are easy to follow.
 
