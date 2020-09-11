@@ -6,7 +6,7 @@ This is the README for extension "log-scope-ext".
 
 Formatted scope log extension
 
-\!\[preview\]\(preview.gif\)
+![preview](preview.gif)
 
 ## Requirements
 
@@ -15,7 +15,8 @@ Formatted scope log extension
 This extension contributes the following settings:
 
 * `formatted-scope-log.isWithBrackets`: enable/disable brackets around message text. Default `true`
-* `formatted-scope-log.logPrefix`: set log prefix (log type), after witch follows `.info` (for `console` - `.log`),`.warn`,`.error`. Default `this.log`. Possible values (for example): `log`, `console`.
+* `formatted-scope-log.logPrefix`: set log prefix (log type), after witch follows `.info` (for `console` - `.log`),`.warn`,`.error`.
+Default `this.log`. Possible values (for example): `log`, `console`.
 
 ## Known Issues
 
