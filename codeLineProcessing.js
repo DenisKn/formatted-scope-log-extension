@@ -1,18 +1,22 @@
 /**
+ * @file parts of code was borrowed from https://github.com/Chakroun-Anas/turbo-console-log
+ */
+
+/**
  * Check if line code represents a class declaration
  * @author Chakroun Anas <chakroun.anas@outlook.com>
  */
-function checkIfClass(lineCode) {
+function checkIfClass(codeLine) {
   const classNameRegex = /class(\s+)[a-zA-Z]+(.*){/;
-  return classNameRegex.test(lineCode);
+  return classNameRegex.test(codeLine);
 }
 
 /**
  * Return the class name in case if the line code represents a class declaration
  */
-function className(lineCode) {
-  if (lineCode.split(/class /).length >= 2) {
-    return lineCode.split(/class /)[1].split(' ')[0].split('{')[0].trim();
+function className(codeLine) {
+  if (codeLine.split(/class /).length >= 2) {
+    return codeLine.split(/class /)[1].split(' ')[0].split('{')[0].trim();
   }
   return '';
 }
@@ -20,7 +24,7 @@ function className(lineCode) {
 /**
  * Return a boolean indicating if the line code represents a named function declaration
  */
-function checkIfFunction(lineCode) {
+function checkIfFunction(codeLine) {
   const namedFunctionDeclarationRegex = /(function)?(\s*)[a-zA-Z]+(\s*)\(.*\):?(\s*)[a-zA-Z]*(\s*){/;
   const nonNamedFunctionDeclaration = /(function)(\s*)\(.*\)(\s*){/; // a() => {}
   // const s = function a() {
@@ -30,11 +34,11 @@ function checkIfFunction(lineCode) {
   const publicMethod = /(public)(\s*)(static)?(async)?(\s*)[a-zA-Z]+\(/;
   const privateMethod = /(private)(\s*)(static)?(async)?[a-zA-Z]+\(/;
 
-  const isNamedFunctionDeclaration = namedFunctionDeclarationRegex.test(lineCode);
-  const isNonNamedFunctionDeclaration = nonNamedFunctionDeclaration.test(lineCode);
-  const isNamedFunctionExpression = namedFunctionExpressionRegex.test(lineCode);
-  const isPublicMethod = publicMethod.test(lineCode);
-  const isPrivateMethod = privateMethod.test(lineCode);
+  const isNamedFunctionDeclaration = namedFunctionDeclarationRegex.test(codeLine);
+  const isNonNamedFunctionDeclaration = nonNamedFunctionDeclaration.test(codeLine);
+  const isNamedFunctionExpression = namedFunctionExpressionRegex.test(codeLine);
+  const isPublicMethod = publicMethod.test(codeLine);
+  const isPrivateMethod = privateMethod.test(codeLine);
 
   return (
     (isNamedFunctionDeclaration && !isNonNamedFunctionDeclaration) ||
@@ -47,17 +51,17 @@ function checkIfFunction(lineCode) {
  * Return the function name in case if the line code represents a named function declaration
  * @author Chakroun Anas <chakroun.anas@outlook.com>
  */
-function functionName(lineCode) {
-  if (/function(\s+)[a-zA-Z]+(\s*)\(.*\)(\s*){/.test(lineCode)) {
-    if (lineCode.split("function ").length > 1) {
-      return lineCode
+function functionName(codeLine) {
+  if (/function(\s+)[a-zA-Z]+(\s*)\(.*\)(\s*){/.test(codeLine)) {
+    if (codeLine.split("function ").length > 1) {
+      return codeLine
         .split("function ")[1]
         .split("(")[0]
         .replace(/(\s*)/g, '');
     }
   } else {
-    if (lineCode.split(/\(.*\)/).length > 1) {
-      const textInTheLeftOfTheParams = lineCode.split(/\(.*\)/)[0];
+    if (codeLine.split(/\(.*\)/).length > 1) {
+      const textInTheLeftOfTheParams = codeLine.split(/\(.*\)/)[0];
       if (/=/.test(textInTheLeftOfTheParams)) {
         if (textInTheLeftOfTheParams.split("=").length > 1) {
           return textInTheLeftOfTheParams
@@ -71,8 +75,8 @@ function functionName(lineCode) {
         );
       }
     } else
-    if (lineCode.split(/\((\s*)(\/\/)?/).length > 1) {
-      const textInTheLeftOfTheParams = lineCode.split(/\((\s*)(\/\/)?/)[0];
+    if (codeLine.split(/\((\s*)(\/\/)?/).length > 1) {
+      const textInTheLeftOfTheParams = codeLine.split(/\((\s*)(\/\/)?/)[0];
       if (/=/.test(textInTheLeftOfTheParams)) {
         if (textInTheLeftOfTheParams.split("=").length > 1) {
           return textInTheLeftOfTheParams
@@ -94,9 +98,9 @@ function functionName(lineCode) {
  * Return a boolean indicating if the line code represents an if, switch, while, for or catch statement
  * @author Chakroun Anas <chakroun.anas@outlook.com>
  */
-function checkIfJSBuiltInStatement(lineCode) {
+function checkIfJSBuiltInStatement(codeLine) {
   const jSBuiltInStatement = /(if|switch|while|for|catch)(\s*)\(.*\)(\s*){/;
-  return jSBuiltInStatement.test(lineCode);
+  return jSBuiltInStatement.test(codeLine);
 }
 
 module.exports.checkIfClass = checkIfClass;

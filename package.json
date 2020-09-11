@@ -4,7 +4,12 @@
 	"description": "Formatted scope log extension",
 	"icon": "icon.png",
 	"version": "0.0.1",
-	"publisher": "d",
+	"author": {
+		"name": "Denis Kezin",
+		"email": "denkezin95@gmail.com"
+	},
+	"publisher": "DenisKezin",
+	"license": "MIT",
 	"engines": {
 		"vscode": "^1.48.0"
 	},

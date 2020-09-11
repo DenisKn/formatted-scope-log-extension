@@ -1,7 +1,11 @@
+/**
+ * @file parts of code was borrowed from https://github.com/Chakroun-Anas/turbo-console-log
+ */
+
 // The module 'vscode' contains the VS Code extensibility API
 // Import the module and reference it with the alias vscode in your code below
 const vscode = require('vscode');
-const lineCodeProcessing = require("./lineCodeProcessing");
+const codeLineProcessing = require("./codeLineProcessing");
 // this method is called when your extension is activated
 // your extension is activated the very first time the command is executed
 
@@ -81,26 +85,26 @@ function enclosingBlockName(
     const currentLineText = document.lineAt(currentLineNum).text;
     switch (blockType) {
       case 'class':
-        if (lineCodeProcessing.checkIfClass(currentLineText)) {
+        if (codeLineProcessing.checkIfClass(currentLineText)) {
           if (
             lineOfSelectedVar > currentLineNum &&
             lineOfSelectedVar < blockClosingBraceLineNum(document, currentLineNum)
           ) {
-            return `${lineCodeProcessing.className(currentLineText)}`;
+            return `${codeLineProcessing.className(currentLineText)}`;
           }
         }
         break;
       case 'function':
         if (
-          lineCodeProcessing.checkIfFunction(currentLineText) &&
-          !lineCodeProcessing.checkIfJSBuiltInStatement(currentLineText)
+          codeLineProcessing.checkIfFunction(currentLineText) &&
+          !codeLineProcessing.checkIfJSBuiltInStatement(currentLineText)
         ) {
           if (
             lineOfSelectedVar >= currentLineNum &&
             lineOfSelectedVar < blockClosingBraceLineNum(document, currentLineNum)
           ) {
-            if (lineCodeProcessing.functionName(currentLineText).length !== 0) {
-              return `${lineCodeProcessing.functionName(currentLineText)}`;
+            if (codeLineProcessing.functionName(currentLineText).length !== 0) {
+              return `${codeLineProcessing.functionName(currentLineText)}`;
             }
             return '';
           }

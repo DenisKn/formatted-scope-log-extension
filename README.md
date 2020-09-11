@@ -1,43 +1,31 @@
 # log-scope-ext README
 
-This is the README for your extension "log-scope-ext".
+This is the README for extension "log-scope-ext".
 
 ## Features
 
+Formatted scope log extension
+
 \!\[preview\]\(preview.gif\)
 
-> Tip: Many popular extensions utilize animations. This is an excellent way to show off your extension! We recommend short, focused animations that are easy to follow.
-
 ## Requirements
-
-If you have any requirements or dependencies, add a section describing those and how to install and configure them.
 
 ## Extension Settings
 
 This extension contributes the following settings:
 
 * `formatted-scope-log.isWithBrackets`: enable/disable brackets around message text. Default `true`
-* `formatted-scope-log.logPrefix`: set log prefix (log type), after witch follows `.info` (for `console` - `.log`)|`.warn`|`.error`. Default `this.log`. Possible values (for example): `log`, `console`.
+* `formatted-scope-log.logPrefix`: set log prefix (log type), after witch follows `.info` (for `console` - `.log`),`.warn`,`.error`. Default `this.log`. Possible values (for example): `log`, `console`.
 
 ## Known Issues
 
-Calling out known issues can help limit users opening duplicate issues against your extension.
+Perhaps some specific cases are not processed correctly. Please tell me about it.
 
 ## Release Notes
 
-Users appreciate release notes as you update your extension.
-
 ### 1.0.0
 
-Initial release of ...
-
-### 1.0.1
-
-Fixed issue #.
-
-### 1.1.0
-
-Added features X, Y, and Z.
+Initial release
 
 -----------------------------------------------------------------------------------------------------------
 
