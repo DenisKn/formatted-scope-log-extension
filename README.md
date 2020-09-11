@@ -4,7 +4,7 @@ This is the README for extension "log-scope-ext".
 
 ## Features
 
-Formatted scope log extension
+Formatted scope log extension for Visual Studio Code
 
 ![preview](preview.gif)
 
