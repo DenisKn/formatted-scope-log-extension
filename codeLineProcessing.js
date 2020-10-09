@@ -32,7 +32,7 @@ function checkIfFunction(codeLine) {
   const namedFunctionExpressionRegex = /[a-zA-Z]+(\s*)=(\s*)(function)?(async)?(\s*)[a-zA-Z]*(\s*)\(.*\)(\s*)(=>)?(\s*){/;
   // methods
   const publicMethod = /(public)(\s*)(static)?(async)?(\s*)[a-zA-Z]+\(/;
-  const privateMethod = /(private)(\s*)(static)?(async)?[a-zA-Z]+\(/;
+  const privateMethod = /(private)(\s*)(static)?(async)?(\s*)[a-zA-Z]+\(/;
 
   const isNamedFunctionDeclaration = namedFunctionDeclarationRegex.test(codeLine);
   const isNonNamedFunctionDeclaration = nonNamedFunctionDeclaration.test(codeLine);
